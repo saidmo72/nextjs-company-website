@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import Link from "next/link";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,7 +23,48 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+<header className="bg-green-800 text-white">
+  <nav className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5">
+    
+
+<Link
+  href="/"
+  className="rounded-lg bg-blue-900 px-4 py-2 text-xl font-bold text-white shadow-lg shadow-blue-950/60 transition-all duration-300 hover:bg-green-900 hover:text-white hover:shadow-xl active:bg-green-950"
+>
+  Weser Bau &amp; Objektservice
+</Link>
+
+
+
+
+    <div className="flex flex-wrap gap-5">
+      
+
+<Link href="/" className="rounded-lg bg-red-600 px-4 py-2 font-bold text-white shadow-lg shadow-red-900/50 transition-all duration-300 hover:bg-green-900 hover:shadow-xl">Startseite</Link>
+
+
+<Link href="/leistungen" className="rounded-lg bg-red-600 px-4 py-2 font-bold text-white shadow-lg shadow-red-900/50 transition-all duration-300 hover:bg-green-900 hover:shadow-xl">
+  Leistungen
+</Link>
+
+<Link href="/projekte" className="rounded-lg bg-red-600 px-4 py-2 font-bold text-white shadow-lg shadow-red-900/50 transition-all duration-300 hover:bg-green-900 hover:shadow-xl">
+  Projekte
+</Link>
+
+<Link href="/kontakt" className="rounded-lg bg-red-600 px-4 py-2 font-bold text-white shadow-lg shadow-red-900/50 transition-all duration-300 hover:bg-green-900 hover:shadow-xl">
+  Kontakt
+</Link>
+
+<Link href="/impressum" className="rounded-lg bg-red-600 px-4 py-2 font-bold text-white shadow-lg shadow-red-900/50 transition-all duration-300 hover:bg-green-900 hover:shadow-xl">
+  Impressum
+</Link>
+
+
+    </div>
+  </nav>
+</header>
+{children}</body>
     </html>
   );
 }

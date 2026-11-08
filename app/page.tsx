@@ -107,7 +107,7 @@ export default function Home() {
       </section>
 
       <footer className="bg-gray-950 px-6 py-6 text-center text-sm text-white">
-        © {new Date().getFullYear()} Weser Bau & Objektservice
+        2026 Weser Bau & Objektservice
       </footer>
     </main>
   );

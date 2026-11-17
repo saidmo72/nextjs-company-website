@@ -1,5 +1,17 @@
 
-export default function Home() {
+export default async function Home() {
+  const response = await fetch(
+    "http://localhost:1337/api/startseite",
+    { cache: "no-store" }
+  );
+
+  const strapiData = response.ok
+    ? await response.json()
+    : null;
+
+  const introText =
+    strapiData?.data?.introText ??
+    "Professionelle Gartenpflege, Pflasterarbeiten und Zaunbau in Negenborn, Holzminden und Umgebung.";
   return (
     
 <main className="min-h-screen bg-[url('/images/startseite.jpg')] bg-cover bg-center bg-no-repeat text-white">
@@ -26,8 +38,7 @@ export default function Home() {
           Ihr Partner für Gartenpflege & Außenanlagen
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-white">
-          Professionelle Gartenpflege, Pflasterarbeiten und Zaunbau
-          in Negenborn, Holzminden und Umgebung.
+  {introText}
         </p>
         <a
           href="#kontakt"

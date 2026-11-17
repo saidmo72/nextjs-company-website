@@ -1,5 +1,5 @@
 
-import Link from "next/link";
+import Link from "next/link";import ProjectImage from "./ProjectImage";
 
 const projects = [
   {
@@ -24,7 +24,29 @@ const projects = [
   },
 ];
 
-export default function ProjektePage() {
+export default async function ProjektePage() { 
+    const response = await fetch(
+    "http://localhost:1337/api/projekte?populate=*",
+    { cache: "no-store" }
+  );
+
+  const strapiData = await response.json();
+
+  const newProjects = (strapiData.data ?? []).map(
+  (p: { title: string; description: string; image?: { url: string }[] }) => ({
+    title: p.title,
+    description: p.description,
+    image: p.image?.[0]?.url
+      ? `http://localhost:1337${p.image[0].url}`
+      : "",
+  })
+);const allProjects = [
+  ...projects.map((project, index) => ({
+    ...project,
+    image: `/projects/foto-${index + 1}.jpeg`,
+  })),
+  ...newProjects,
+];
   return (
     <main className="min-h-screen bg-green-300 text-gray-900">
       <header className="bg-green-900 px-6 py-5 text-white">
@@ -51,15 +73,16 @@ export default function ProjektePage() {
 
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-6 md:grid-cols-3">
-          {projects.map((project) => (
+          {allProjects.map((project) => (
             <article
               key={project.title}
               className="overflow-hidden rounded-xl border border-gray-200 shadow-sm"
             >
-              <img
-  src={`/projects/foto-${projects.indexOf(project) + 1}.jpeg`}
+              
+  <ProjectImage
+  src={project.image}
   alt={project.title}
-  className="h-48 w-full object-cover"
+
 />
 
               <div className="p-6">

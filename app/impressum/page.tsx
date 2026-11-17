@@ -7,15 +7,15 @@ export default function ImpressumPage() {
           Impressum
         </h1>
 
-        <div className="space-y-6 text-gray-700">
+        <div className="space-y-6 bg-green-700 text-gray-700">
           <section>
             <h2 className="mb-2 text-xl font-semibold">
               Angaben gemäß § 5 DDG
             </h2>
             <p>Weser Bau &amp; Objektservice</p>
-            <p>[Vollständiger Name des Inhabers]</p>
-            <p>[Straße und Hausnummer]</p>
-            <p>[Postleitzahl] Negenborn</p>
+            <p>Waled Said</p>
+            <p>Neue str 5</p>
+            <p>37643 Negenborn</p>
             <p>Deutschland</p>
           </section>
 

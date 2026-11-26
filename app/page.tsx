@@ -1,13 +1,21 @@
 
 export default async function Home() {
-  const response = await fetch(
-    "http://localhost:1337/api/startseite",
-    { cache: "no-store" }
-  );
+  let strapiData: { data?: { introText?: string } } | null = null;
 
-  const strapiData = response.ok
-    ? await response.json()
-    : null;
+if (process.env.NODE_ENV === "development") {
+  try {
+    const response = await fetch(
+      "http://localhost:1337/api/startseite",
+      { cache: "no-store" }
+    );
+
+    if (response.ok) {
+      strapiData = await response.json();
+    }
+  } catch {
+    console.log("Strapi is not available locally.");
+  }
+}
 
   const introText =
     strapiData?.data?.introText ??

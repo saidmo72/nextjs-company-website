@@ -25,22 +25,40 @@ const projects = [
 ];
 
 export default async function ProjektePage() { 
+    let newProjects: {
+  title: string;
+  description: string;
+  image: string;
+}[] = [];
+
+if (process.env.NODE_ENV === "development") {
+  try {
     const response = await fetch(
-    "http://localhost:1337/api/projekte?populate=*",
-    { cache: "no-store" }
-  );
+      "http://localhost:1337/api/projekte?populate=*",
+      { cache: "no-store" }
+    );
 
-  const strapiData = await response.json();
+    if (response.ok) {
+      const strapiData = await response.json();
 
-  const newProjects = (strapiData.data ?? []).map(
-  (p: { title: string; description: string; image?: { url: string }[] }) => ({
-    title: p.title,
-    description: p.description,
-    image: p.image?.[0]?.url
-      ? `http://localhost:1337${p.image[0].url}`
-      : "",
-  })
-);const allProjects = [
+      newProjects = (strapiData.data ?? []).map(
+        (p: {
+          title: string;
+          description: string;
+          image?: { url: string }[];
+        }) => ({
+          title: p.title,
+          description: p.description,
+          image: p.image?.[0]?.url
+            ? `http://localhost:1337${p.image[0].url}`
+            : "",
+        })
+      );
+    }
+  } catch {
+    console.log("Strapi is not available locally.");
+  }
+} const allProjects = [
   ...projects.map((project, index) => ({
     ...project,
     image: `/projects/foto-${index + 1}.jpeg`,
